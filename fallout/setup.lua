@@ -1,30 +1,18 @@
+  -- Arquivo de Configuração do SETUP inicial do MOD de Fallout - Board Game
+  -- Utilizando API do Tabletop Simulator
+  -- MOD e SCRIPT desenvolvidos por @mathmed
+  -- https://github.com/mathmed/
+
   function onload()
-    criar_botoes()
-    Turns.enable = true
-    self.use_hands = true
+    -- Criando interface inicial
+    interface_inicial()
   end
 
-  function criar_botoes()
-    self.createButton({
-      click_function = 'setup_original', label = 'ORIGINAL',
-      function_owner = self,
-      position = { 0, 0.18, -1}, rotation = {0, 0, 0},
-      width = 1300, height = 300, font_size = 70
-    })
-    self.createButton({
-      click_function = 'setup_exp', label = 'EXPANSÃO NÃO OFICIAL',
-      function_owner = self,
-      position = { 0, 0.18, 0}, rotation = {0, 0, 0},
-      width = 1300, height = 300, font_size = 70
-    })
-  end
-  
-  -- Objeto auxiliar para posições dos tiles
-
+  -- Objeto auxiliar para posições dos tiles do mapa
   width = 4.85
   height = 4.2
   
-  tilePosition = {
+  posicao_tiles = {
     [1] = {
       [1] = { - 14.5, 0.96, 15.50},
       [2] = { - 14.5 + (width * 1), 0.96, 15.50},
@@ -93,8 +81,27 @@
     }
   }
 
+  function interface_inicial()
+
+    -- Botões de opções
+    self.createButton({
+      click_function = 'setup_original', label = 'JOGO ORIGINAL',
+      function_owner = self,
+      position = { 0, 0.18, -1}, rotation = {0, 0, 0},
+      width = 1300, height = 300, font_size = 70
+    })
+    self.createButton({
+      click_function = 'setup_exp', label = 'EXPANSÃO NÃO OFICIAL',
+      function_owner = self,
+      position = { 0, 0.18, 0}, rotation = {0, 0, 0},
+      width = 1300, height = 300, font_size = 70
+    })
+  end
+  
+
   function setup_original(setup)
     
+    -- Limpando interface
     setup.clearButtons()
 
     -- Removendo arquivos de expansão
@@ -110,7 +117,8 @@
   end
 
   function setup_exp(setup)
-
+    
+    -- Limpando interface
     setup.clearButtons()
 
     -- Ajustando para expansão
@@ -125,6 +133,8 @@
   end
 
   function criar_cenarios()
+
+    -- Botões de seleção do cenário
     self.createButton({
       click_function = 'pitt', label = 'O Pitt',
       function_owner = self,
@@ -156,7 +166,8 @@
 
   function farHarbour(setup)
 
-    local arrange = {
+    -- Arranjo dos tiles
+    local arranjo = {
       [1] = {'null', 'null', 'null', 'null', 'null', 'null', 'null'},
       [2] = {'null', 'other', 'green', 'green', 'null', 'null', 'null'},
       [3] = {'null', 'green', 'green', 'green', 'other', 'null', 'null'},
@@ -167,7 +178,7 @@
     }
     local mainTile = {'crossroads', 'haven', 'nucleus', 'acadia'}
     local mainVal = {2, 1, 2, 2}
-    arrangeTiles(arrange, mainTile, mainVal);
+    alocar_tiles(arranjo, mainTile, mainVal);
 
     getObjectFromGUID('90eb82').setPositionSmooth({ 18.53, 0.75, - 0.21})
     getObjectFromGUID('d7a4b6').setPositionSmooth({ 16.17, 0.94, 3.44})
@@ -189,10 +200,11 @@
     end
 
     -- Cartas de missão inicial
-    findCard(29, {-4.61, 0.75, 21.05})
-    findCard(30, {-0.61, 0.75, 21.05})
-    findCard(31, {3.61, 0.75, 21.05})
+    pegar_carta(29, {-4.61, 0.75, 21.05})
+    pegar_carta(30, {-0.61, 0.75, 21.05})
+    pegar_carta(31, {3.61, 0.75, 21.05})
 
+    -- Removendo itens não utilizados
     getObjectFromGUID("8b837d").destruct()
     getObjectFromGUID("107e5d").destruct()
     getObjectFromGUID("e0a410").destruct()
@@ -200,15 +212,16 @@
     getObjectFromGUID("679035").destruct()
     getObjectFromGUID("3d7ecd").destruct()
 
-    shuffle_all()
-    find_interface(setup)
-
+    -- Embaralhando e abrindo interface final de procura
+    embaralhar()
+    interface_procura(setup)
 
   end
 
   function pitt(setup)
 
-    local arrange = {
+    -- Arranjo dos tiles
+    local arranjo = {
       [1] = {'null', 'null', 'null', 'null', 'null', 'null', 'null'},
       [2] = {'null', 'null', 'null', 'other', 'null', 'null', 'null'},
       [3] = {'null', 'null', 'other', 'other', 'null', 'null', 'null'},
@@ -219,7 +232,7 @@
     }
     local mainTile = {'haven', 'nucleus', 'acadia', 'crossroads'}
     local mainVal = {2, 1, 1, 1}
-    arrangeTiles(arrange, mainTile, mainVal);
+    alocar_tiles(arranjo, mainTile, mainVal);
 
     getObjectFromGUID('8b837d').setPositionSmooth({ 18.53, 0.75, - 0.21})
     getObjectFromGUID('d7a4b6').setPositionSmooth({ 16.17, 0.94, 3.44})
@@ -238,23 +251,26 @@
     end
 
     -- Cartas de missão inicial
-    findCard(56, {-4.61, 0.75, 21.05})
+    pegar_carta(56, {-4.61, 0.75, 21.05})
 
+    -- Removendo itens não utilizados
     getObjectFromGUID("90eb82").destruct()
     getObjectFromGUID("107e5d").destruct()
     getObjectFromGUID("e0a410").destruct()
     getObjectFromGUID("677118").destruct()
     getObjectFromGUID("679035").destruct()
     getObjectFromGUID("b319a2").destruct()
-
-    shuffle_all()
-    find_interface(setup)
-
+    
+    -- Embaralhando e abrindo interface final de procura
+    embaralhar()
+    interface_procura(setup)
 
   end
 
   function ermos(setup)
-    local arrange = {
+
+    -- Arranjo dos tiles
+    local arranjo = {
       [1] = {'null', 'null', 'null', 'null', 'null', 'null', 'null'},
       [2] = {'null', 'other', 'green', 'green', 'green', 'null', 'null'},
       [3] = {'null', 'green', 'green', 'green', 'null', 'null', 'null'},
@@ -265,14 +281,16 @@
     }
     local obj2 = getObjectFromGUID("fb7624")
     local tile = obj2.getObjects()
+
     for key, val in pairs(tile) do
       if(val.guid == '1d14b3') then
-        obj2.takeObject({guid = val.guid, position = tilePosition[6][2] })
+        obj2.takeObject({guid = val.guid, position = posicao_tiles[6][2] })
       end
     end
+
     local mainTile = {'crossroads', 'megaton', 'mall', 'tower', 'citRuins'}
     local mainVal = {2, 1, 1, 1, 1}
-    arrangeTiles(arrange, mainTile, mainVal);
+    alocar_tiles(arranjo, mainTile, mainVal);
 
     getObjectFromGUID('107e5d').setPositionSmooth({ 18.53, 0.75, - 0.21})
     getObjectFromGUID('d7a4b6').setPositionSmooth({ 16.17, 0.94, 3.44})
@@ -281,7 +299,9 @@
     -- Tokens auxiliares no mapa
     local obj = getObjectFromGUID("677118")
     local bag = obj.getObjects()
+
     getObjectFromGUID('e1d4ce').setPositionSmooth({2.55, 0.95, 11.46})
+
     for k, v in pairs(bag) do
       if(v.guid == "95eefb") then
         obj.takeObject({guid = v.guid, position = {-12.14, 1.01, -3.97}})
@@ -289,8 +309,9 @@
     end
 
     -- Cartas de missão inicial
-    findCard(44, {-4.61, 0.75, 21.05})
+    pegar_carta(44, {-4.61, 0.75, 21.05})
 
+    -- Removendo itens não utilizados
     getObjectFromGUID("90eb82").destruct()
     getObjectFromGUID("8b837d").destruct()
     getObjectFromGUID("e0a410").destruct()
@@ -298,14 +319,15 @@
     getObjectFromGUID("3d7ecd").destruct()
     getObjectFromGUID("b319a2").destruct()
 
-    shuffle_all()
-    find_interface(setup)
-
-
+    -- Embaralhando e abrindo interface final de procura
+    embaralhar()
+    interface_procura(setup)
   end
 
   function comunidade(setup)
-    local arrange = {
+
+    -- Arranjo dos tiles
+    local arranjo = {
       [1] = {'null', 'null', 'null', 'null', 'null', 'null', 'null'},
       [2] = {'null', 'null', 'null', 'null', 'null', 'null', 'null'},
       [3] = {'null', 'other', 'green', 'green', 'red', 'red', 'null'},
@@ -316,7 +338,7 @@
     }
     local mainTile = {'crossroads', 'citRuins', 'megaton', 'mall'}
     local mainVal = {2, 2, 2, 2}
-    arrangeTiles(arrange, mainTile, mainVal);
+    alocar_tiles(arranjo, mainTile, mainVal);
 
     -- Tokens de trilha da facção
     getObjectFromGUID('e0a410').setPositionSmooth({ 18.53, 0.75, - 0.21})
@@ -333,8 +355,9 @@
     end
 
     -- Cartas de missão inicial
-    findCard(14, {-4.61, 0.75, 21.05})
-    
+    pegar_carta(14, {-4.61, 0.75, 21.05})
+
+    -- Removendo itens não utilizados
     getObjectFromGUID("90eb82").destruct()
     getObjectFromGUID("8b837d").destruct()
     getObjectFromGUID("107e5d").destruct()
@@ -342,12 +365,14 @@
     getObjectFromGUID("3d7ecd").destruct()
     getObjectFromGUID("677118").destruct()
 
-    shuffle_all()
-    find_interface(setup)
+    -- Embaralhando e abrindo interface final de procura
+    embaralhar()
+    interface_procura(setup)
 
   end
   
-  function arrangeTiles(tiles, main, mainVal)
+  -- Função para alocar tiles do cenário na mesa
+  function alocar_tiles(tiles, main, mainVal)
     local counter = 1
     for i = 1, 7, 1 do
       for j = 1, 7, 1 do
@@ -355,21 +380,21 @@
           local bag = getObjectFromGUID("16df29")
           bag.randomize()
           local params = {}
-          params.position = tilePosition[i][j]
+          params.position = posicao_tiles[i][j]
           params.rotation = {0, 150, 180}
           bag.takeObject(params).lock()
         elseif tiles[i][j] == 'red' then
           local bag = getObjectFromGUID("fb7624")
           bag.randomize()
           local params = {}
-          params.position = tilePosition[i][j]
+          params.position = posicao_tiles[i][j]
           params.rotation = {0, 150, 180}
           bag.takeObject(params).lock()
         elseif tiles[i][j] == 'other' then
           local bag = getObjectFromGUID("f5b7f3")
           local objects = bag.getObjects()
           local params = {}
-          params.position = tilePosition[i][j]
+          params.position = posicao_tiles[i][j]
           for k, v in pairs(objects) do
             if main[counter] == v.name then
               local oguid = v.guid
@@ -397,10 +422,11 @@
     getObjectFromGUID("16df29").destruct()
   end
 
-  function find_interface(setup)
+  -- Abrindo interface para procurar e retirar cartas do deck de missão
+  function interface_procura(setup)
     setup.clearButtons()
     self.createInput({
-      input_function = 'find_control',
+      input_function = 'controle_busca',
       function_owner = self,
       position = {0, 0.18, - 0.5},
       label = 'Nº Carta',
@@ -417,36 +443,35 @@
     })
   end
 
-  inputValue = ''
+  carta_procurada = ''
 
-  function find_control(panel, player_color, value, selected)
+  function controle_busca(panel, player_color, value, selected)
     if selected == false then
-      inputValue = value
+      carta_procurada = value
     end
   end
 
   function procurar()
-    findCard(inputValue, {-16.86, 0.75, 1.80})
-    inputValue = ''
+    pegar_carta(carta_procurada, {-16.86, 0.75, 1.80})
+    carta_procurada = ''
   end
 
-  function findCard(number, position)
+  function pegar_carta(number, position)
     local obj = getObjectFromGUID("dc2129")
     local objects = obj.getObjects()
-    local found = false
+    local encontrou = false
     for key, value in pairs(objects) do
       if(value.name == tostring(number)) then
         obj.takeObject({guid = value.guid, position = position, rotation = {0.00, 180.00, 0.00}})
-        found = true
+        encontrou = true
       end
     end
-    if found == false then
+    if encontrou == false then
       broadcastToAll('Carta não encontrada... Procure manualmente no Deck')
     end
   end
 
-  function shuffle_all()
-
+  function embaralhar()
     getObjectFromGUID("91b3d3").shuffle()
     getObjectFromGUID("49b3cf").shuffle()
     getObjectFromGUID("a44066").shuffle()
@@ -457,6 +482,5 @@
     getObjectFromGUID("6692db").shuffle()
     getObjectFromGUID("3ca1f6").shuffle()
     getObjectFromGUID("c1e1ae").shuffle()
-
   end
 
