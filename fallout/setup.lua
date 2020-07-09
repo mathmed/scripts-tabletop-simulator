@@ -98,7 +98,6 @@
     })
   end
   
-
   function setup_original(setup)
     
     -- Limpando interface
@@ -274,8 +273,9 @@
     getObjectFromGUID("679035").destruct()
     getObjectFromGUID("3d7ecd").destruct()
 
-    -- Embaralhando e abrindo interface final de procura
+    -- Embaralhando, abrindo loja e abrindo interface final de procura
     embaralhar()
+    abrir_loja()
     interface_procura(setup)
 
   end
@@ -323,8 +323,9 @@
     getObjectFromGUID("679035").destruct()
     getObjectFromGUID("b319a2").destruct()
     
-    -- Embaralhando e abrindo interface final de procura
+    -- Embaralhando, abrindo loja e abrindo interface final de procura
     embaralhar()
+    abrir_loja()
     interface_procura(setup)
 
   end
@@ -381,8 +382,9 @@
     getObjectFromGUID("3d7ecd").destruct()
     getObjectFromGUID("b319a2").destruct()
 
-    -- Embaralhando e abrindo interface final de procura
+    -- Embaralhando, abrindo loja e abrindo interface final de procura
     embaralhar()
+    abrir_loja()
     interface_procura(setup)
   end
 
@@ -427,10 +429,25 @@
     getObjectFromGUID("3d7ecd").destruct()
     getObjectFromGUID("677118").destruct()
 
-    -- Embaralhando e abrindo interface final de procura
+    -- Embaralhando, abrindo loja e abrindo interface final de procura
     embaralhar()
+    abrir_loja()
     interface_procura(setup)
 
+  end
+
+  -- Abrindo as 4 cartas da loja quando o SETUP é iniciado
+  function abrir_loja()
+    local loja = getObjectFromGUID("49b3cf")
+    local cartas = loja.getObjects()
+    local cont = 0;
+    local start = -5.8
+    for k, v in pairs(cartas) do
+      if(cont < 4) then
+        loja.takeObject({guid = v.guid, position = {-35.39, 0.74, start + cont*5.3}, callback_function = function(ref) ref.flip() end})
+        cont= cont+1
+      end
+    end
   end
   
   -- Função para alocar tiles do cenário na mesa
