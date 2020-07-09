@@ -112,8 +112,70 @@
     getObjectFromGUID("923b73").destruct()
     getObjectFromGUID("94f903").destruct()
 
-    criar_cenarios(self)
+    -- Botões para selecionar número de jogadores
+    self.createButton({
+      click_function = 'um_jogador', label = '1 JOGADOR',
+      function_owner = self,
+      position = { - 1, 0.18, - 0.5}, rotation = {0, 0, 0},
+      width = 800, height = 300, font_size = 70
+    })
 
+    self.createButton({
+      click_function = 'dois_jogadores', label = '2 JOGADORES',
+      function_owner = self,
+      position = { 1, 0.18, - 0.5}, rotation = {0, 0, 0},
+      width = 800, height = 300, font_size = 70
+    })
+
+    self.createButton({
+      click_function = 'tres_jogadores', label = '3 JOGADORES',
+      function_owner = self,
+      position = { - 1, 0.18, 0.5}, rotation = {0, 0, 0},
+      width = 800, height = 300, font_size = 70
+    })
+
+    self.createButton({
+      click_function = 'quatro_jogadores', label = '4 JOGADORES',
+      function_owner = self,
+      position = { 1, 0.18, 0.5}, rotation = {0, 0, 0},
+      width = 800, height = 300, font_size = 70
+    })
+  end
+
+  function um_jogador(setup)
+    --- Ajustando deck
+    remover_agendas(1, setup)
+  end
+
+  function dois_jogadores(setup)
+    --- Ajustando deck
+    remover_agendas(2, setup)
+  end
+
+  function tres_jogadores(setup)
+    --- Ajustando deck
+    remover_agendas(3, setup)
+  end
+
+  function quatro_jogadores(setup)
+    --- Ajustando deck
+    remover_agendas(4, setup)
+  end
+
+  function remover_agendas(players, setup)
+
+    -- Limpando interface
+    setup.clearButtons()
+    
+    local obj = getObjectFromGUID("677845")
+    local deck = obj.getObjects()
+    for key, carta in pairs(deck) do
+      if(tonumber(carta.name) > players) then
+        obj.takeObject({smooth= false ,guid = carta.guid, callback_function = function(x) x.destruct() end})
+      end
+    end
+    --- Interface pra criar cenarios
+    criar_cenarios()
   end
 
   function setup_exp(setup)
@@ -122,7 +184,7 @@
     setup.clearButtons()
 
     -- Ajustando para expansão
-    getObjectFromGUID("5e0a2a").destruct()
+    getObjectFromGUID("677845").destruct()
     getObjectFromGUID("a915c0").setPositionSmooth({ -42.57, 1.01, -5.84})
     getObjectFromGUID("358397").setPositionSmooth({ -42.57, 1.01, -10.84})
     getObjectFromGUID("853aed").setPositionSmooth({ 13.52, 1.69, 27.21})
@@ -483,4 +545,3 @@
     getObjectFromGUID("3ca1f6").shuffle()
     getObjectFromGUID("c1e1ae").shuffle()
   end
-
