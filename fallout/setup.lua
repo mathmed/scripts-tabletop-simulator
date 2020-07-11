@@ -241,22 +241,22 @@
     local mainVal = {2, 1, 2, 2}
     alocar_tiles(arranjo, mainTile, mainVal);
 
-    getObjectFromGUID('90eb82').setPositionSmooth({ 18.53, 0.75, - 0.21})
-    getObjectFromGUID('d7a4b6').setPositionSmooth({ 16.17, 0.94, 3.44})
-    getObjectFromGUID('f5d313').setPositionSmooth({ 16.17, 0.94, 3.44})
+    getObjectFromGUID('90eb82').setPositionSmooth({ 26.63, 0.85, 19.48})
+    getObjectFromGUID('d7a4b6').setPositionSmooth({ 24.18, 1.04, 23.24})
+    getObjectFromGUID('f5d313').setPositionSmooth({ 24.18, 1.04, 23.24})
 
     -- Tokens auxiliares no mapa
     local obj = getObjectFromGUID("b319a2")
     local bag = obj.getObjects()
     for k, v in pairs(bag) do
       if(v.guid == "b53bac") then
-        obj.takeObject({guid = v.guid, position = {3.50, 0.95, 7.45}})
+        obj.takeObject({guid = v.guid, position = {9.73, 0.96, 4.35}})
       end
       if(v.guid == "c3e3b9") then
-        obj.takeObject({guid = v.guid, position = {-9.41, 1.05, -0.82}})
+        obj.takeObject({guid = v.guid, position = {-7.78, 1.06, -6.78}})
       end
       if(v.guid == "16a494") then
-        obj.takeObject({guid = v.guid, position = {-0.34, 1.06, -1.99}})
+        obj.takeObject({guid = v.guid, position = {4.47, 1.05, -8.34}})
       end
     end
 
@@ -296,19 +296,19 @@
     local mainVal = {2, 1, 1, 1}
     alocar_tiles(arranjo, mainTile, mainVal);
 
-    getObjectFromGUID('8b837d').setPositionSmooth({ 18.53, 0.75, - 0.21})
-    getObjectFromGUID('d7a4b6').setPositionSmooth({ 16.17, 0.94, 3.44})
-    getObjectFromGUID('f5d313').setPositionSmooth({ 16.17, 0.94, 3.44})
+    getObjectFromGUID('8b837d').setPositionSmooth({ 26.63, 0.85, 19.48})
+    getObjectFromGUID('d7a4b6').setPositionSmooth({ 24.18, 1.04, 23.24})
+    getObjectFromGUID('f5d313').setPositionSmooth({ 24.18, 1.04, 23.24})
 
     -- Tokens auxiliares no mapa
     local obj = getObjectFromGUID("3d7ecd")
     local bag = obj.getObjects()
     for k, v in pairs(bag) do
       if(v.guid == "e440de") then
-        obj.takeObject({guid = v.guid, position = {-3.82, 0.96, 8.48}})
+        obj.takeObject({guid = v.guid, position = {-0.48, 0.95, 6.14}})
       end
       if(v.guid == "dea6e0") then
-        obj.takeObject({guid = v.guid, position = {-2.20, 1.06, 12.64}})
+        obj.takeObject({guid = v.guid, position = {1.70, 1.06, 11.49}})
       end
     end
 
@@ -355,19 +355,19 @@
     local mainVal = {2, 1, 1, 1, 1}
     alocar_tiles(arranjo, mainTile, mainVal);
 
-    getObjectFromGUID('107e5d').setPositionSmooth({ 18.53, 0.75, - 0.21})
-    getObjectFromGUID('d7a4b6').setPositionSmooth({ 16.17, 0.94, 3.44})
-    getObjectFromGUID('f5d313').setPositionSmooth({ 16.17, 0.94, 3.44})
+    getObjectFromGUID('107e5d').setPositionSmooth({ 26.63, 0.85, 19.48})
+    getObjectFromGUID('d7a4b6').setPositionSmooth({ 24.18, 1.04, 23.24})
+    getObjectFromGUID('f5d313').setPositionSmooth({ 24.18, 1.04, 23.24})
 
     -- Tokens auxiliares no mapa
     local obj = getObjectFromGUID("677118")
     local bag = obj.getObjects()
 
-    getObjectFromGUID('e1d4ce').setPositionSmooth({2.55, 0.95, 11.46})
+    getObjectFromGUID('e1d4ce').setPositionSmooth({8.35, 0.95, 10.09})
 
     for k, v in pairs(bag) do
       if(v.guid == "95eefb") then
-        obj.takeObject({guid = v.guid, position = {-12.14, 1.01, -3.97}})
+        obj.takeObject({guid = v.guid, position = {-11.63, 0.94, -11.85}})
       end
     end
 
@@ -405,16 +405,16 @@
     alocar_tiles(arranjo, mainTile, mainVal);
 
     -- Tokens de trilha da facção
-    getObjectFromGUID('e0a410').setPositionSmooth({ 18.53, 0.75, - 0.21})
-    getObjectFromGUID('d7a4b6').setPositionSmooth({ 16.17, 0.94, 3.44})
-    getObjectFromGUID('f5d313').setPositionSmooth({ 16.17, 0.94, 3.44})
+    getObjectFromGUID('e0a410').setPositionSmooth({ 26.63, 0.85, 19.48})
+    getObjectFromGUID('d7a4b6').setPositionSmooth({ 24.18, 1.04, 23.24})
+    getObjectFromGUID('f5d313').setPositionSmooth({ 24.18, 1.04, 23.24})
 
     -- Tokens auxiliares no mapa
     local obj = getObjectFromGUID("679035")
     local bag = obj.getObjects()
     for k, v in pairs(bag) do
       if(v.guid == "b53bac") then
-        obj.takeObject({guid = v.guid, position = { 0.05, 0.95, -1.17}})
+        obj.takeObject({guid = v.guid, position = { 4.76, 1.05, -7.58}})
       end
     end
 
