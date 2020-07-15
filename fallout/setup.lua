@@ -105,7 +105,7 @@
 
     -- Removendo arquivos de expansão
     getObjectFromGUID("7aa20b").destruct()
-    getObjectFromGUID("a915c0").destruct()
+    getObjectFromGUID("4a4475").destruct()
     getObjectFromGUID("358397").destruct()
     getObjectFromGUID("853aed").destruct()
     getObjectFromGUID("923b73").destruct()
@@ -184,7 +184,7 @@
 
     -- Ajustando para expansão
     getObjectFromGUID("677845").destruct()
-    getObjectFromGUID("a915c0").setPositionSmooth({ -42.57, 1.01, -5.84})
+    getObjectFromGUID("4a4475").setPositionSmooth({ -42.57, 1.01, -5.84})
     getObjectFromGUID("358397").setPositionSmooth({ -42.57, 1.01, -10.84})
     getObjectFromGUID("853aed").setPositionSmooth({ 13.52, 1.69, 27.21})
     getObjectFromGUID("923b73").setPosition({ -42.57, 1.01, 5})
