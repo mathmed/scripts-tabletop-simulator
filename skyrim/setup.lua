@@ -200,7 +200,7 @@ function CheckMonsterFill(k, deck)
             math.randomseed(os.time()) -- random initialize
             math.random(); math.random(); math.random(); -- warming up
             local dice = math.random(1, 12)
-            if(dice > 6) then
+            if(dice > 8) then
                 for k, v in pairs(monsterDeckUse.getObjects()) do
                     params = {}
                     params.rotation = {0,180,0}
