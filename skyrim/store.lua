@@ -8,7 +8,7 @@ end
 
 function onObjectLeaveScriptingZone(zone, obj)
     if zone == MarketZone and (obj.tag == 'Card' or obj.tag == 'Deck') then
-        local deck = "376dd0"
+        local deck = "4c616c"
         if(obj.getName() == "Item") then 
             deck = "d93507" 
         end

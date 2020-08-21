@@ -1,7 +1,7 @@
 function onload()
     MarketPositions = {{51.93, 1.49, 7.94}, {51.89, 1.49, 3.56}, {51.91, 1.49, -0.87}, {51.93, 1.49, -5.34}, {46.60, 1.49, 7.98}, {46.56, 1.49, 3.62}, {46.61, 1.49, -0.88}, {46.67, 1.49, -5.33}}
     deckItems = getObjectFromGUID("d93507")
-    deckBuild = getObjectFromGUID("376dd0")
+    deckBuild = getObjectFromGUID("4c616c")
     monstersLevel1 = getObjectFromGUID("274ddd")
     monstersLevel2 = getObjectFromGUID("3d7380")
     bosses = getObjectFromGUID("aa5e1b")
