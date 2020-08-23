@@ -1,10 +1,10 @@
 function onload()
     MarketPositions = {{51.93, 1.49, 7.94}, {51.89, 1.49, 3.56}, {51.91, 1.49, -0.87}, {51.93, 1.49, -5.34}, {46.60, 1.49, 7.98}, {46.56, 1.49, 3.62}, {46.61, 1.49, -0.88}, {46.67, 1.49, -5.33}}
-    deckItems = getObjectFromGUID("d93507")
-    deckBuild = getObjectFromGUID("4c616c")
-    monstersLevel1 = getObjectFromGUID("274ddd")
-    monstersLevel2 = getObjectFromGUID("3d7380")
-    bosses = getObjectFromGUID("aa5e1b")
+    deckItems = getObjectFromGUID("15e982")
+    deckBuild = getObjectFromGUID("a9df43")
+    monstersLevel1 = getObjectFromGUID("39e535")
+    monstersLevel2 = getObjectFromGUID("f71229")
+    bosses = getObjectFromGUID("9eff7f")
     initialInterface()
 end
 
@@ -31,7 +31,12 @@ function newMonster()
 
     self.clearButtons()
     CheckMonsterFill()
-
+    self.createButton({
+        click_function = 'nothing', label = (turn .. " TURN"),
+        function_owner = self,
+        position = { 0, 0.18, -0.7}, rotation = {0, 0, 0},
+        width = 1500, height = 400, font_size = 90
+      })
     self.createButton({
         click_function = 'playCards', label = "GO TO PLAY CARDS PHASE",
         function_owner = self,
@@ -44,6 +49,12 @@ function playCards()
     broadcastToAll("Phase of playing and revealing the cards!")
     self.clearButtons()
     self.createButton({
+        click_function = 'nothing', label = (turn .. " TURN"),
+        function_owner = self,
+        position = { 0, 0.18, -0.7}, rotation = {0, 0, 0},
+        width = 1500, height = 400, font_size = 90
+      })
+    self.createButton({
         click_function = 'monstersAttack', label = "GO TO MONSTERS ATTACK PHASE",
         function_owner = self,
         position = { 0, 0.18, 0.3}, rotation = {0, 0, 0},
@@ -55,6 +66,12 @@ function monstersAttack()
     broadcastToAll("Monster attack phase, roll the dice!")
     self.clearButtons()
     self.createButton({
+        click_function = 'nothing', label = (turn .. " TURN"),
+        function_owner = self,
+        position = { 0, 0.18, -0.7}, rotation = {0, 0, 0},
+        width = 1500, height = 400, font_size = 90
+      })
+    self.createButton({
         click_function = 'store', label = "GO TO STORE PHASE",
         function_owner = self,
         position = { 0, 0.18, 0.3}, rotation = {0, 0, 0},
@@ -65,6 +82,12 @@ end
 function store()
     broadcastToAll("Store phase, start with the first player!")
     self.clearButtons()
+    self.createButton({
+        click_function = 'nothing', label = (turn .. " TURN"),
+        function_owner = self,
+        position = { 0, 0.18, -0.7}, rotation = {0, 0, 0},
+        width = 1500, height = 400, font_size = 90
+      })
     self.createButton({
         click_function = 'endTurn', label = "END TURN",
         function_owner = self,

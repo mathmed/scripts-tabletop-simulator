@@ -8,9 +8,9 @@ end
 
 function onObjectLeaveScriptingZone(zone, obj)
     if zone == MarketZone and (obj.tag == 'Card' or obj.tag == 'Deck') then
-        local deck = "4c616c"
+        local deck = "a9df43"
         if(obj.getName() == "Item") then 
-            deck = "d93507" 
+            deck = "15e982" 
         end
         SearchEmptyPlaces(deck)
     end
