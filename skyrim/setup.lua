@@ -1,5 +1,9 @@
 function onload()
     MarketPositions = {{51.93, 1.49, 7.94}, {51.89, 1.49, 3.56}, {51.91, 1.49, -0.87}, {51.93, 1.49, -5.34}, {46.60, 1.49, 7.98}, {46.56, 1.49, 3.62}, {46.61, 1.49, -0.88}, {46.67, 1.49, -5.33}}
+    MarketGUID = {"fc8b4f", "a4a5b1", "689ea3", "a0d6dc"}
+    Place = {}
+    for i=1, 4, 1 do Place[i] = getObjectFromGUID(MarketGUID[i]) end
+
     deckItems = getObjectFromGUID("15e982")
     deckBuild = getObjectFromGUID("a9df43")
     monstersLevel1 = getObjectFromGUID("39e535")
@@ -122,7 +126,12 @@ function endTurn()
 
     self.clearButtons()
     broadcastToAll(turn .. " TURN")
+
+    newBuildStore()
+
     startTurn()
+
+
 end
 
 function initialInterface()
@@ -238,3 +247,34 @@ function CheckMonsterFill(k, deck)
     end
 end
 
+function newBuildStore()
+    for k=1, 4, 1 do
+        PlaceCard = {}
+        PlaceCard = Place[k].getObjects()
+        for i=1, #PlaceCard, 1 do
+            if PlaceCard[i].name == 'Card' then
+                local card = getObjectFromGUID(PlaceCard[i].guid)
+                card.setPositionSmooth({57.80, 1.51, 8.56})
+                SearchMainDeck(k, "a9df43")
+            end
+        end
+    end
+end
+function SearchMainDeck(k, deck)
+    objDeck = {}
+    objDeck = getObjectFromGUID(deck).getObjects()
+    for i=1, #objDeck, 1 do
+        DeckDealer(i, k, deck)
+        break
+    end
+end
+function DeckDealer(i, position, deck)
+    local params = {}
+    for k, v in pairs(objDeck) do
+        params.rotation = {0,270,0}
+        params.position = MarketPositions[position]
+        guid = v.guid
+        getObjectFromGUID(deck).takeObject(params)
+        break
+      end
+end
